@@ -35,7 +35,7 @@ namespace NBAStats.Core.ViewModels
 
         private void Logout()
         {
-            NavigationService.NavigateAsync(new System.Uri(nameof(LoginPage), System.UriKind.Absolute));
+            NavigationService.NavigateAsync($"/{nameof(LoginPage)}");
         }
 
         private bool _sortByPointPerGame;
