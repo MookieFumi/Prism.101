@@ -1,5 +1,6 @@
 ﻿using MonkeyCache.LiteDB;
 using NBAStats.Core.Services;
+using NBAStats.Core.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Players"
-             x:Class="NBAStats.Core.PlayersPage">
+             x:Class="NBAStats.Core.Views.PlayersPage">
     <ContentPage.Content>
-        <!--ItemsSource="{Binding Players}"                        
-        SelectedItem="{Binding SelectedPlayer , Mode=TwoWay}"
-        SelectionChangedCommand="{Binding NavigateToDetailCommand}"-->
         <CollectionView VerticalOptions="FillAndExpand"
                         Margin="0,20"
                         SelectionMode="Single"
-                        x:Name="PlayersCollectionView">
+                        ItemsSource="{Binding Players}"
+                        SelectedItem="{Binding SelectedPlayer , Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding NavigateToPlayerCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="20">

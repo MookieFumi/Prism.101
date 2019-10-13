@@ -3,19 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
-             x:Class="NBAStats.Core.SettingsPage">
+             x:Class="NBAStats.Core.Views.SettingsPage">
     <ContentPage.Content>
         <StackLayout Padding="20">
             <StackLayout Orientation="Horizontal">
-                <CheckBox x:Name="SortByPointPerGame" />
+                <CheckBox IsChecked="{Binding SortByPointPerGame}" />
                 <Label Text="Sort by point per game"
                        VerticalOptions="Center" />
             </StackLayout>
             <Label Text="Show only players of my fav team" />
-            <Picker x:Name="TeamsPicker" />
+            <Picker ItemsSource="{Binding Teams}"
+                    SelectedItem="{Binding SelectedTeam}" />
             <Button Text="Logout"
                     x:Name="LogoutButton"
-                    Clicked="LogoutButton_Clicked" />
+                    Command="{Binding LogoutCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

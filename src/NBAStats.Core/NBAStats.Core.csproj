@@ -23,6 +23,9 @@
     <Folder Include="Services\Cache\Base\" />
     <Folder Include="Resources\" />
     <Folder Include="Controls\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+    <Folder Include="ViewModels\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\nba.svg" />

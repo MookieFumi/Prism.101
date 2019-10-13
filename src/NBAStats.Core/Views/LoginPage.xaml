@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NBAStats.Core.LoginPage"
+             x:Class="NBAStats.Core.Views.LoginPage"
              BackgroundColor="White"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
@@ -23,27 +23,24 @@
             <StackLayout Grid.Row="1">
                 <Label Text="User" />
                 <Entry Placeholder="Fill your username"
-                       x:Name="UsernameEntry"
-                       TextChanged="UsernameEntry_TextChanged" />
+                       Text="{Binding Username}" />
                 <Label Text="Password" />
                 <Entry Placeholder="Fill your awesome password"
-                       x:Name="PasswordEntry"
-                       TextChanged="PasswordEntry_TextChanged"
+                       Text="{Binding Password}"
                        IsPassword="True" />
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox x:Name="AllowSendStats" />
+                    <CheckBox IsChecked="{Binding AllowSendStats}" />
                     <Label Text="Allow send private stats"
                            VerticalOptions="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox x:Name="UseCacheServices" />
+                    <CheckBox IsChecked="{Binding UseCacheServices}" />
                     <Label Text="Use cache services (exp.)"
                            VerticalOptions="Center" />
                 </StackLayout>
                 <Button Text="Login"
-                        x:Name="LoginButton"
-                        IsEnabled="False"
-                        Clicked="LoginButton_Clicked" />
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding CanLogin}" />
             </StackLayout>
             <StackLayout Grid.Row="2"
                          Orientation="Horizontal"

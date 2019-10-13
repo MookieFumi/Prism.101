@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:NBAStats.Core.Controls"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
-             x:Class="NBAStats.Core.PlayerPage">
+             x:Class="NBAStats.Core.Views.PlayerPage">
     <ContentPage.Content>
         <controls:PlayerView />
     </ContentPage.Content>
