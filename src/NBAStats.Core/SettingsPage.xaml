@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             x:Class="NBAStats.Core.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <StackLayout Orientation="Horizontal">
+                <CheckBox x:Name="SortByPointPerGame" />
+                <Label Text="Sort by point per game"
+                       VerticalOptions="Center" />
+            </StackLayout>
+            <Label Text="Show only players of my fav team" />
+            <Picker x:Name="TeamsPicker" />
+            <Button Text="Logout"
+                    x:Name="LogoutButton"
+                    Clicked="LogoutButton_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

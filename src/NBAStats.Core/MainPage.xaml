@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Cache;assembly=FFImageLoading"
+             xmlns:controls="clr-namespace:NBAStats.Core.Controls"
+             x:Class="NBAStats.Core.PlayersPage">
+    <ContentPage.Content>
+        <!--ItemsSource="{Binding Players}"                        
+        SelectedItem="{Binding SelectedPlayer , Mode=TwoWay}"
+        SelectionChangedCommand="{Binding NavigateToDetailCommand}"-->
+        <CollectionView VerticalOptions="FillAndExpand"
+                        SelectionMode="Single"
+                        x:Name="PlayersCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <controls:PlayerView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

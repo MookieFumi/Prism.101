@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NBAStats.Core.LoginPage"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Grid.Row="0"
+                         BackgroundColor="Yellow">
+                <ffimageloadingsvg:SvgCachedImage WidthRequest="100"
+                                                  HeightRequest="100"
+                                                  Source="resource://NBAStats.Core.Resources.nba.svg" />
+            </StackLayout>
+            <StackLayout Grid.Row="1">
+
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
