@@ -1,24 +1,24 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Acr.UserDialogs;
-using MonkeyCache.LiteDB;
 using NBAStats.Core.Model;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
+using Prism.Commands;
+using Prism.Navigation;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace NBAStats.Core.ViewModels
 {
+
     public class PlayersPageViewModel : BaseViewModel
     {
-        public ICommand NavigateToPlayerCommand { get; set; }
+        public DelegateCommand NavigateToPlayerCommand { get; set; }
 
-        public PlayersPageViewModel(IPlayersService playersService)
+        public PlayersPageViewModel(INavigationService navigationService, IPlayersService playersService) : base(navigationService)
         {
             _playersService = playersService;
-            NavigateToPlayerCommand = new Command(NavigateToPlayer);
+            NavigateToPlayerCommand = new DelegateCommand(NavigateToPlayer);
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
@@ -28,14 +28,17 @@ namespace NBAStats.Core.ViewModels
                     Players = new ObservableCollection<PlayerDTO>(players);
                 }
             });
-
         }
 
         private void NavigateToPlayer()
         {
             using (UserDialogs.Instance.Loading("Loading player..."))
             {
-                Application.Current.MainPage.Navigation.PushAsync(new PlayerPage(SelectedPlayer));
+                var @params = new NavigationParameters
+                {
+                    { "player", SelectedPlayer }
+                };
+                NavigationService.NavigateAsync(nameof(PlayerPage), @params);
             }
         }
 
@@ -49,8 +52,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _selectedPlayer = value;
-                OnPropertyChanged();
+                SetProperty(ref _selectedPlayer, value);
             }
         }
 
@@ -65,8 +67,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _players = value;
-                OnPropertyChanged();
+                SetProperty(ref _players, value);
             }
         }
     }

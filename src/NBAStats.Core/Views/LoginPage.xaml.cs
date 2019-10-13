@@ -9,7 +9,6 @@ namespace NBAStats.Core.Views
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new LoginPageViewModel(DependencyService.Resolve<ILoginService>());
         }
     }
 }

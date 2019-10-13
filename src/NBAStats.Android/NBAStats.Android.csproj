@@ -78,6 +78,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.32</Version>
     </PackageReference>
+    <PackageReference Include="Prism.Unity.Forms">
+      <Version>7.2.0.1367</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

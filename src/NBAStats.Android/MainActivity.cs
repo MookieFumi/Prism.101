@@ -4,6 +4,8 @@ using Android.Runtime;
 using Android.OS;
 using NBAStats.Core;
 using FFImageLoading.Svg.Forms;
+using Prism;
+using Prism.Ioc;
 
 namespace NBAStats.Droid
 {
@@ -26,7 +28,7 @@ namespace NBAStats.Droid
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
             var ignore = typeof(SvgCachedImage);
 
-            LoadApplication(new App());
+            LoadApplication(new App(new AndroidInitializer()));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -34,6 +36,14 @@ namespace NBAStats.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    public class AndroidInitializer : IPlatformInitializer
+    {
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

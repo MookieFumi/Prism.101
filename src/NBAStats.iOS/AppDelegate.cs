@@ -1,6 +1,8 @@
 ﻿using FFImageLoading.Svg.Forms;
 using Foundation;
 using NBAStats.Core;
+using Prism;
+using Prism.Ioc;
 using UIKit;
 
 namespace NBAStats.iOS
@@ -27,9 +29,15 @@ namespace NBAStats.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageSourceHandler();
             var ignore = typeof(SvgCachedImage);
 
-            LoadApplication(new App());
+            LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(uiApplication, launchOptions);
+        }
+    }
+    public class iOSInitializer : IPlatformInitializer
+    {
+        void IPlatformInitializer.RegisterTypes(IContainerRegistry containerRegistry)
+        {
         }
     }
 }

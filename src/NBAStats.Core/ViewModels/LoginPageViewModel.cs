@@ -1,23 +1,21 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Threading.Tasks;
 using Acr.UserDialogs;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
-using Xamarin.Forms;
+using Prism.Commands;
+using Prism.Navigation;
 
 namespace NBAStats.Core.ViewModels
 {
     public class LoginPageViewModel : BaseViewModel
     {
-        public ICommand LoginCommand { get; private set; }
+        public DelegateCommand LoginCommand { get; private set; }
 
-        public LoginPageViewModel(ILoginService loginService)
+        public LoginPageViewModel(INavigationService navigationService, ILoginService loginService) : base(navigationService)
         {
-            LoginCommand = new Command(async () => await Login());
-            this.loginService = loginService;
+            LoginCommand = new DelegateCommand(async () => await Login());
+            _loginService = loginService;
         }
 
         private async Task Login()
@@ -32,11 +30,9 @@ namespace NBAStats.Core.ViewModels
                     UseCacheServices = UseCacheServices
                 };
 
-                if (await loginService.Login(request))
+                if (await _loginService.Login(request))
                 {
-                    var page = Application.Current.MainPage.Navigation.NavigationStack.First();
-                    await Application.Current.MainPage.Navigation.PushAsync(new MyTabbedPage());
-                    Application.Current.MainPage.Navigation.RemovePage(page);
+                    await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
                 }
             }
         }
@@ -50,8 +46,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _username = value;
-                OnPropertyChanged();
+                SetProperty(ref _username, value);
                 if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
                 {
                     CanLogin = true;
@@ -69,8 +64,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _password = value;
-                OnPropertyChanged();
+                SetProperty(ref _password, value);
                 if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
                 {
                     CanLogin = true;
@@ -88,8 +82,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _allowSendStats = value;
-                OnPropertyChanged();
+                SetProperty(ref _allowSendStats, value);
             }
         }
 
@@ -103,13 +96,12 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _useCacheServices = value;
-                OnPropertyChanged();
+                SetProperty(ref _useCacheServices, value);
             }
         }
 
         private bool _canLogin;
-        private readonly ILoginService loginService;
+        private readonly ILoginService _loginService;
 
         public bool CanLogin
         {
@@ -119,8 +111,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _canLogin = value;
-                OnPropertyChanged();
+                SetProperty(ref _canLogin, value);
             }
         }
     }

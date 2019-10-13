@@ -10,9 +10,6 @@ namespace NBAStats.Core.Views
         public SettingsPage()
         {
             InitializeComponent();
-
-            var playersService = new Services.Cache.PlayersService(Barrel.Current, DependencyService.Resolve<IPlayersService>());
-            BindingContext = new SettingsPageViewModel(playersService);
         }
     }
 }

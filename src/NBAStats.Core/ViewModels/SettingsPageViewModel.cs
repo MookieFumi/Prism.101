@@ -2,21 +2,20 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using MonkeyCache.LiteDB;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
+using Prism.Commands;
+using Prism.Navigation;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace NBAStats.Core.ViewModels
 {
     public class SettingsPageViewModel : BaseViewModel
     {
-        public ICommand LogoutCommand => new Command(Logout);
+        public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
 
-        public SettingsPageViewModel(IPlayersService playersService)
+        public SettingsPageViewModel(INavigationService navigationService, IPlayersService playersService) : base(navigationService)
         {
             Task.Run(async () =>
             {
@@ -36,9 +35,7 @@ namespace NBAStats.Core.ViewModels
 
         private void Logout()
         {
-            var page = Application.Current.MainPage.Navigation.NavigationStack.First();
-            Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
-            Application.Current.MainPage.Navigation.RemovePage(page);
+            NavigationService.NavigateAsync(new System.Uri(nameof(LoginPage), System.UriKind.Absolute));
         }
 
         private bool _sortByPointPerGame;
@@ -51,23 +48,21 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _sortByPointPerGame = value;
-                OnPropertyChanged();
+                SetProperty(ref _sortByPointPerGame, value);
             }
         }
 
-        private string _seletecTeam;
+        private string _selectedTeam;
 
         public string SelectedTeam
         {
             get
             {
-                return _seletecTeam;
+                return _selectedTeam;
             }
             set
             {
-                _seletecTeam = value;
-                OnPropertyChanged();
+                SetProperty(ref _selectedTeam, value);
             }
         }
 
@@ -82,8 +77,7 @@ namespace NBAStats.Core.ViewModels
             }
             set
             {
-                _teams = value;
-                OnPropertyChanged();
+                SetProperty(ref _teams, value);
             }
         }
     }

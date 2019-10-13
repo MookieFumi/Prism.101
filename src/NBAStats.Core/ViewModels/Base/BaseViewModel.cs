@@ -1,15 +1,15 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using Prism.Mvvm;
+using Prism.Navigation;
 
 namespace NBAStats.Core.ViewModels.Base
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : BindableBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        public BaseViewModel(INavigationService navigationService)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            NavigationService = navigationService;
         }
+
+        protected INavigationService NavigationService { get; }
     }
 }
