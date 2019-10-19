@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBAStats.Core.Test", "NBAStats.Core.Test\NBAStats.Core.Test.csproj", "{35BCF66E-50DA-4EC8-A190-B9F6636E5658}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{AE8EF8E6-CFFD-4A31-A96F-6E7FDB0669EA}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{AE8EF8E6-CFFD-4A31-A96F-6E7FDB0669EA}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{AE8EF8E6-CFFD-4A31-A96F-6E7FDB0669EA}.Release|iPhone.Build.0 = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{35BCF66E-50DA-4EC8-A190-B9F6636E5658}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

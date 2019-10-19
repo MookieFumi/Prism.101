@@ -76,7 +76,7 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Acr.UserDialogs">
-      <Version>7.0.32</Version>
+      <Version>7.0.35</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity.Forms">
       <Version>7.2.0.1367</Version>
