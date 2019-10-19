@@ -1,21 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NBAStats.Core.Model;
+using NBAStats.Core.Services.Base;
+using NBAStats.Core.Services.Exceptions;
 using Refit;
 
 namespace NBAStats.Core.Services
 {
-    public class PlayersService : IPlayersService
+    public class PlayersService : BaseService, IPlayersService
     {
-        private const string baseUrl = "https://nba-players.herokuapp.com";
+        public PlayersService(IAppContextService contextService, IConnectivityService connectivityService) : base(contextService, connectivityService)
+        {
+        }
 
         public async Task<IEnumerable<PlayerDTO>> GetPlayers()
         {
-            var service = RestService.For<IPlayersService>(baseUrl);
+            if (!ConnectivityService.HasConnection())
+            {
+                throw new NotConnectivityException();
+            }
+            try
+            {
+                var context = ContextService.GetContext();
 
-            var result = await service.GetPlayers();
+                var service = RestService.For<IPlayersService>(context.ApiUrl);
 
-            return result;
+                var result = await service.GetPlayers();
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                throw new ServiceException(exception.Message);
+            }
         }
     }
 }

@@ -3,7 +3,6 @@ using NBAStats.Core.Views;
 using Prism;
 using Prism.Ioc;
 using Prism.Unity;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NBAStats.Core
@@ -24,21 +23,6 @@ namespace NBAStats.Core
             Barrel.ApplicationId = nameof(NBAStats);
         }
 
-        protected override void OnStart()
-        {
-            // Handle when your app starts
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
-
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             InitializeCache();
@@ -51,6 +35,7 @@ namespace NBAStats.Core
         {
             InitializeComponent();
 
+            Persistence.Context = new Context.AppContext();
             NavigationService.NavigateAsync($"{nameof(LoginPage)}");
         }
     }

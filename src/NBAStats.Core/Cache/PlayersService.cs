@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MonkeyCache;
+using NBAStats.Core.Cache.Base;
 using NBAStats.Core.Model;
-using NBAStats.Core.Services.Cache.Base;
+using NBAStats.Core.Services;
 
-namespace NBAStats.Core.Services.Cache
+namespace NBAStats.Core.Cache
 {
     public class PlayersService : CacheBaseService, IPlayersService
     {

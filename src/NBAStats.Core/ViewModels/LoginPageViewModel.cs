@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
@@ -10,34 +11,58 @@ namespace NBAStats.Core.ViewModels
 {
     public class LoginPageViewModel : BaseViewModel
     {
+        private string _username;
+        private string _password;
+        private bool _allowSendStats;
+        private bool _canLogin;
+        private readonly ILoginService _loginService;
+
         public DelegateCommand LoginCommand { get; private set; }
 
-        public LoginPageViewModel(INavigationService navigationService, ILoginService loginService) : base(navigationService)
+        public LoginPageViewModel(ICoreServices coreService, ILoginService loginService) : base(coreService)
         {
-            LoginCommand = new DelegateCommand(async () => await Login());
             _loginService = loginService;
+
+#if DEBUG
+            Username = "mookiefumi@nba.com";
+            Password = "nba@2019";
+#endif
+
+            LoginCommand = new DelegateCommand(async () => await Login())
+                .ObservesCanExecute(() => CanLogin);
         }
 
         private async Task Login()
         {
-            using (UserDialogs.Instance.Loading("Wait, login you..."))
-            {
-                var request = new Model.LoginRequestDTO
-                {
-                    Username = Username,
-                    Password = Password,
-                    AllowSendStats = AllowSendStats,
-                    UseCacheServices = UseCacheServices
-                };
 
-                if (await _loginService.Login(request))
+            var request = new Model.LoginRequestDTO
+            {
+                Username = Username,
+                Password = Password,
+                AllowSendStats = AllowSendStats,
+                UseCacheServices = UseCacheServices
+            };
+
+            try
+            {
+                using (UserDialogs.Loading("Wait, login you..."))
                 {
-                    await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
+                    var response = await _loginService.Login(request);
+                    if (response.IsValid)
+                    {
+                        ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
+                        await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}");
+                        //await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                await HandleException(exception);
             }
         }
 
-        private string _username;
+        #region Properties
         public string Username
         {
             get
@@ -47,14 +72,9 @@ namespace NBAStats.Core.ViewModels
             set
             {
                 SetProperty(ref _username, value);
-                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-                {
-                    CanLogin = true;
-                }
+                CanLogin = !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
             }
         }
-
-        private string _password;
 
         public string Password
         {
@@ -65,14 +85,9 @@ namespace NBAStats.Core.ViewModels
             set
             {
                 SetProperty(ref _password, value);
-                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-                {
-                    CanLogin = true;
-                }
+                CanLogin = !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
             }
         }
-
-        private bool _allowSendStats;
 
         public bool AllowSendStats
         {
@@ -100,9 +115,6 @@ namespace NBAStats.Core.ViewModels
             }
         }
 
-        private bool _canLogin;
-        private readonly ILoginService _loginService;
-
         public bool CanLogin
         {
             get
@@ -114,5 +126,6 @@ namespace NBAStats.Core.ViewModels
                 SetProperty(ref _canLogin, value);
             }
         }
+        #endregion
     }
 }

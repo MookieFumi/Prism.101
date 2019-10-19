@@ -42,7 +42,7 @@ namespace NBAStats.Core.Model
         public string ThreePointPercentage { get; set; }
 
         [JsonProperty("points_per_game")]
-        public string PointsPerGame { get; set; }
+        public decimal PointsPerGame { get; set; }
 
         [JsonProperty("offensive_rebounds_per_game")]
         public string OffensiveReboundsPerGame { get; set; }

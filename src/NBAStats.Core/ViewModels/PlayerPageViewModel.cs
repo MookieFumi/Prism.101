@@ -1,17 +1,47 @@
-﻿using NBAStats.Core.Model;
+﻿using System.Threading.Tasks;
+using NBAStats.Core.Model;
 using NBAStats.Core.ViewModels.Base;
 using Prism.Navigation;
 
 namespace NBAStats.Core.ViewModels
 {
-    public class PlayerPageViewModel : BaseViewModel, IInitialize
+    public class PlayerPageViewModel : BaseViewModel
     {
-        public PlayerPageViewModel(INavigationService navigationService) : base(navigationService)
+        private string _name;
+        private string _minutesPerGame;
+        private string _image;
+        private decimal _pointsPerGame;
+        private string _reboundsPerGame;
+        private string _assistsPerGame;
+        private string _stealsPerGame;
+        private string _blocksPerGame;
+
+        public PlayerPageViewModel(ICoreServices coreService) : base(coreService)
         {
         }
 
-        private string _name;
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+        }
 
+        public override async Task InitializeAsync(INavigationParameters parameters)
+        {
+            //    var player = parameters.GetValue<PlayerDTO>("player");
+
+            //    //Name = player.Name;
+            //    //MinutesPerGame = player.MinutesPerGame;
+            //    //Image = player.Image;
+            //    //PointsPerGame = player.PointsPerGame;
+            //    //ReboundsPerGame = player.ReboundsPerGame;
+            //    //AssistsPerGame = player.AssistsPerGame;
+            //    //StealsPerGame = player.StealsPerGame;
+            //    //BlocksPerGame = player.BlocksPerGame;
+
+            await base.InitializeAsync(parameters);
+        }
+
+        #region Properties
         public string Name
         {
             get
@@ -24,8 +54,6 @@ namespace NBAStats.Core.ViewModels
             }
         }
 
-        private string _minutesPerGame;
-
         public string MinutesPerGame
         {
             get
@@ -37,8 +65,6 @@ namespace NBAStats.Core.ViewModels
                 SetProperty(ref _minutesPerGame, value);
             }
         }
-
-        private string _image;
 
         public string Image
         {
@@ -53,9 +79,7 @@ namespace NBAStats.Core.ViewModels
             }
         }
 
-        private string _pointsPerGame;
-
-        public string PointsPerGame
+        public decimal PointsPerGame
         {
             get
             {
@@ -66,8 +90,6 @@ namespace NBAStats.Core.ViewModels
                 SetProperty(ref _pointsPerGame, value);
             }
         }
-
-        private string _reboundsPerGame;
 
         public string ReboundsPerGame
         {
@@ -81,8 +103,6 @@ namespace NBAStats.Core.ViewModels
             }
         }
 
-        private string _assistsPerGame;
-
         public string AssistsPerGame
         {
             get
@@ -94,8 +114,6 @@ namespace NBAStats.Core.ViewModels
                 SetProperty(ref _assistsPerGame, value);
             }
         }
-
-        private string _stealsPerGame;
 
         public string StealsPerGame
         {
@@ -109,8 +127,6 @@ namespace NBAStats.Core.ViewModels
             }
         }
 
-        private string _blocksPerGame;
-
         public string BlocksPerGame
         {
             get
@@ -123,19 +139,6 @@ namespace NBAStats.Core.ViewModels
 
             }
         }
-
-        public void Initialize(INavigationParameters parameters)
-        {
-            var player = parameters.GetValue<PlayerDTO>("player");
-
-            Name = player.Name;
-            MinutesPerGame = player.MinutesPerGame;
-            Image = player.Image;
-            PointsPerGame = player.PointsPerGame;
-            ReboundsPerGame = player.ReboundsPerGame;
-            AssistsPerGame = player.AssistsPerGame;
-            StealsPerGame = player.StealsPerGame;
-            BlocksPerGame = player.BlocksPerGame;
-        }
+        #endregion
     }
 }

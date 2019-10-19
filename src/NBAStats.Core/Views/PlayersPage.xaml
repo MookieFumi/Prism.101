@@ -9,7 +9,7 @@
                         Margin="0,20"
                         SelectionMode="Single"
                         ItemsSource="{Binding Players}"
-                        SelectedItem="{Binding SelectedPlayer , Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"
                         SelectionChangedCommand="{Binding NavigateToPlayerCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

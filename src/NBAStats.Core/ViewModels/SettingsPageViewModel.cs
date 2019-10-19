@@ -2,43 +2,42 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using NBAStats.Core.Events;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
 using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Essentials;
 
 namespace NBAStats.Core.ViewModels
 {
     public class SettingsPageViewModel : BaseViewModel
     {
+        private ObservableCollection<string> _teams;
+        private readonly IPlayersService _playersService;
+        private string _selectedTeam;
+        private bool _sortByPointPerGame;
+
         public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
 
-        public SettingsPageViewModel(INavigationService navigationService, IPlayersService playersService) : base(navigationService)
+        public SettingsPageViewModel(ICoreServices coreService, IPlayersService playersService) : base(coreService)
         {
-            Task.Run(async () =>
-            {
-                var players = await _playersService.GetPlayers();
-                var teams = new List<string> { "Show all teams" };
-                teams.AddRange(players.OrderBy(p => p.TeamName).Select(p => p.TeamName).Distinct());
-
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    Teams = new ObservableCollection<string>(teams);
-                    SelectedTeam = Teams.First();
-                });
-
-            });
             _playersService = playersService;
         }
 
-        private void Logout()
+        public override async Task InitializeAsync(INavigationParameters parameters)
         {
-            NavigationService.NavigateAsync($"/{nameof(LoginPage)}");
+            var players = await _playersService.GetPlayers();
+            var teams = new List<string> { "Show all teams" };
+            teams.AddRange(players.OrderBy(p => p.TeamName).Select(p => p.TeamName).Distinct());
+            Teams = new ObservableCollection<string>(teams);
+
+            var context = ContextService.GetContext();
+            SelectedTeam = context.PreferredTeam;
+            SortByPointPerGame = context.SortByPointsPerGame;
         }
 
-        private bool _sortByPointPerGame;
+        #region Properties
 
         public bool SortByPointPerGame
         {
@@ -49,10 +48,10 @@ namespace NBAStats.Core.ViewModels
             set
             {
                 SetProperty(ref _sortByPointPerGame, value);
+                EventAggregator.GetEvent<SortedByPPGEvent>().Publish(SortByPointPerGame);
+                ContextService.AddSortByPointPerGame(SortByPointPerGame);
             }
         }
-
-        private string _selectedTeam;
 
         public string SelectedTeam
         {
@@ -63,11 +62,13 @@ namespace NBAStats.Core.ViewModels
             set
             {
                 SetProperty(ref _selectedTeam, value);
+                if (_selectedTeam != null)
+                {
+                    EventAggregator.GetEvent<SelectedTeamEvent>().Publish(SelectedTeam);
+                    ContextService.AddSelectedTeam(SelectedTeam);
+                }
             }
         }
-
-        private ObservableCollection<string> _teams;
-        private readonly IPlayersService _playersService;
 
         public ObservableCollection<string> Teams
         {
@@ -79,6 +80,12 @@ namespace NBAStats.Core.ViewModels
             {
                 SetProperty(ref _teams, value);
             }
+        }
+        #endregion
+
+        private void Logout()
+        {
+            NavigationService.NavigateAsync($"/{nameof(LoginPage)}");
         }
     }
 }

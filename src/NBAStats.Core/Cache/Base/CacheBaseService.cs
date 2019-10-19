@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MonkeyCache;
 
-namespace NBAStats.Core.Services.Cache.Base
+namespace NBAStats.Core.Cache.Base
 {
     public class CacheBaseService
     {

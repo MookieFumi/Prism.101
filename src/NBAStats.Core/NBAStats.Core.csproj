@@ -20,13 +20,17 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Model\" />
-    <Folder Include="Services\Cache\" />
-    <Folder Include="Services\Cache\Base\" />
     <Folder Include="Resources\" />
     <Folder Include="Controls\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="ViewModels\Base\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Events\" />
+    <Folder Include="Services\Base\" />
+    <Folder Include="Cache\" />
+    <Folder Include="Services\Exceptions\" />
+    <Folder Include="Context\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\nba.svg" />

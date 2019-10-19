@@ -1,6 +1,4 @@
-﻿using NBAStats.Core.Services;
-using NBAStats.Core.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace NBAStats.Core.Views
 {

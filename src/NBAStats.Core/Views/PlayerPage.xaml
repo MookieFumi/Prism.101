@@ -6,6 +6,6 @@
              ios:Page.UseSafeArea="true"
              x:Class="NBAStats.Core.Views.PlayerPage">
     <ContentPage.Content>
-        <controls:PlayerView />
+        <Label Text="asdadad" />
     </ContentPage.Content>
 </ContentPage>

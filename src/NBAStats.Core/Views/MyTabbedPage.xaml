@@ -6,8 +6,12 @@
             ios:Page.UseSafeArea="true"
             Title="NBA Stats"
             x:Class="NBAStats.Core.Views.MyTabbedPage">
-    <views:PlayersPage Title="Stats"
-                       Icon="icono03.png" />
+    <NavigationPage Title="Stats"
+                    Icon="icono03.png">
+        <x:Arguments>
+            <views:PlayersPage />
+        </x:Arguments>
+    </NavigationPage>
     <views:SettingsPage Title="Settings"
                         Icon="icono02.png" />
 </TabbedPage>
