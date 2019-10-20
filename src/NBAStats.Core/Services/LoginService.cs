@@ -22,7 +22,7 @@ namespace NBAStats.Core.Services
 
             return new LoginResponseDTO
             {
-                IsValid = !string.IsNullOrEmpty(request.Username) && !string.IsNullOrEmpty(request.Password),
+                IsValid = !request.Username.Contains("aaa"),
                 ApiUrl = "https://nba-players.herokuapp.com"
             };
         }

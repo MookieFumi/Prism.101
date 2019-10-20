@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
+using NBAStats.Core.Model;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
 using Prism.Commands;
-using Prism.Navigation;
 
 namespace NBAStats.Core.ViewModels
 {
@@ -13,11 +12,13 @@ namespace NBAStats.Core.ViewModels
     {
         private string _username;
         private string _password;
-        private bool _allowSendStats;
         private bool _canLogin;
+        private bool _allowSendStats;
+        private bool _useCacheServices;
+
         private readonly ILoginService _loginService;
 
-        public DelegateCommand LoginCommand { get; private set; }
+        public DelegateCommandAsync LoginCommand { get; private set; }
 
         public LoginPageViewModel(ICoreServices coreService, ILoginService loginService) : base(coreService)
         {
@@ -28,13 +29,11 @@ namespace NBAStats.Core.ViewModels
             Password = "nba@2019";
 #endif
 
-            LoginCommand = new DelegateCommand(async () => await Login())
-                .ObservesCanExecute(() => CanLogin);
+            LoginCommand = new DelegateCommandAsync(async () => await Login(), () => Task.FromResult(CanLogin));
         }
 
         private async Task Login()
         {
-
             var request = new Model.LoginRequestDTO
             {
                 Username = Username,
@@ -45,16 +44,18 @@ namespace NBAStats.Core.ViewModels
 
             try
             {
-                using (UserDialogs.Loading("Wait, login you..."))
+                LoginResponseDTO response;
+                using (UserDialogs.Loading("Please wait, be patient ..."))
                 {
-                    var response = await _loginService.Login(request);
-                    if (response.IsValid)
-                    {
-                        ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
-                        await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}");
-                        //await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
-                    }
+                    response = await _loginService.Login(request);
                 }
+                if (response.IsValid)
+                {
+                    ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
+                    await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}");
+                    //await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
+                }
+                UserDialogs.Toast("Invalid login, please try it again");
             }
             catch (Exception exception)
             {
@@ -100,8 +101,6 @@ namespace NBAStats.Core.ViewModels
                 SetProperty(ref _allowSendStats, value);
             }
         }
-
-        private bool _useCacheServices;
 
         public bool UseCacheServices
         {

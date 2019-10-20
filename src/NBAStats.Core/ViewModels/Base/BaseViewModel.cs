@@ -39,13 +39,15 @@ namespace NBAStats.Core.ViewModels.Base
 
         protected async Task HandleException(Exception exception)
         {
+            await Task.Delay(0);
+
             if (exception is NotConnectivityException)
             {
                 UserDialogs.Toast("Check your internet connection");
                 return;
             }
 
-            await Task.CompletedTask;
+            UserDialogs.Toast("There was an error calling the API");
         }
     }
 }
