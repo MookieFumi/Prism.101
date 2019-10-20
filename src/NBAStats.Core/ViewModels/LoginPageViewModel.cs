@@ -4,7 +4,6 @@ using NBAStats.Core.Model;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
-using Prism.Commands;
 
 namespace NBAStats.Core.ViewModels
 {

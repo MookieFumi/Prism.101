@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBAStats.Core", "NBAStats.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E99E197-A188-41CE-8DAB-D523A411FCC7}"
 	ProjectSection(SolutionItems) = preProject
-		..\README.md = ..\README.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBAStats.Core.Test", "NBAStats.Core.Test\NBAStats.Core.Test.csproj", "{35BCF66E-50DA-4EC8-A190-B9F6636E5658}"

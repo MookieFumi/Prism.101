@@ -406,4 +406,4 @@ ASALocalRun/
 
 .vscode
 
-BuildReports/
+coverage/

@@ -1,11 +1,11 @@
 # NBAStats Xamarin Forms project
 
-This repo will help us in Prism - 101 Introduction Meetup. It´s an easy app with bad practices, all code is xaml or code behind :(
+This repo will help us in the Prism - 101 Introduction meetup. It´s an easy app with bad practices, all code is in XAML or code behind :(
 
 So, we´re going to apply the next steps:
 
-* Add MVVM
-* Add Prism
+* First one: Add MVVM
+* Last one: Add Prism framework
 
 ## Existing pages
 
