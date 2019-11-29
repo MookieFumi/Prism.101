@@ -6,6 +6,7 @@ using MonkeyCache;
 using MonkeyCache.LiteDB;
 using NBAStats.Core;
 using NBAStats.Core.Services;
+using NBAStats.Core.ViewModels;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
 using Prism.Events;
@@ -21,7 +22,12 @@ namespace Prism.Ioc
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MyTabbedPage>();
 
-            containerRegistry.RegisterAllRegisterablePages();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<PlayersPage, PlayersPageViewModel>();
+            containerRegistry.RegisterForNavigation<PlayerPage, PlayerPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+
+            //containerRegistry.RegisterAllRegisterablePages();
         }
 
         public static void RegisterServices(this IContainerRegistry containerRegistry)
