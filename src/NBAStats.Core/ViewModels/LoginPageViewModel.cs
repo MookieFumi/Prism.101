@@ -48,16 +48,17 @@ namespace NBAStats.Core.ViewModels
                 using (UserDialogs.Loading("Please wait, be patient ..."))
                 {
                     response = await _loginService.Login(request);
-                }
-                if (response.IsValid)
-                {
-                    ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
-                    await NavigationService.NavigateAsync($"{nameof(MyTabbedPage)}");
-                    //await NavigationService.NavigateAsync($"{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
-                }
-                else
-                {
-                    UserDialogs.Toast("Invalid login, please try it again");
+
+                    if (response.IsValid)
+                    {
+                        ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
+                        await NavigationService.NavigateAsync($"{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(PlayersPage)}");
+                        //await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
+                    }
+                    else
+                    {
+                        UserDialogs.Toast("Invalid login, please try it again");
+                    }
                 }
             }
             catch (Exception exception)
