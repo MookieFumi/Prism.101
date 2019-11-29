@@ -27,16 +27,16 @@ namespace NBAStats.Core.ViewModels
 
         public override async Task InitializeAsync(INavigationParameters parameters)
         {
-            //    var player = parameters.GetValue<PlayerDTO>("player");
+            var player = parameters.GetValue<PlayerDTO>("player");
 
-            //    //Name = player.Name;
-            //    //MinutesPerGame = player.MinutesPerGame;
-            //    //Image = player.Image;
-            //    //PointsPerGame = player.PointsPerGame;
-            //    //ReboundsPerGame = player.ReboundsPerGame;
-            //    //AssistsPerGame = player.AssistsPerGame;
-            //    //StealsPerGame = player.StealsPerGame;
-            //    //BlocksPerGame = player.BlocksPerGame;
+            Name = player.Name;
+            MinutesPerGame = player.MinutesPerGame;
+            Image = player.Image;
+            PointsPerGame = player.PointsPerGame;
+            ReboundsPerGame = player.ReboundsPerGame;
+            AssistsPerGame = player.AssistsPerGame;
+            StealsPerGame = player.StealsPerGame;
+            BlocksPerGame = player.BlocksPerGame;
 
             await base.InitializeAsync(parameters);
         }

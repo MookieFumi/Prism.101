@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             Title="Players"
-             x:Class="NBAStats.Core.Views.PlayersPage">
+<controls:CustomContentPage  xmlns:controls="clr-namespace:NBAStats.Core.Controls"
+                             xmlns="http://xamarin.com/schemas/2014/forms"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                             Title="Players"
+                             x:Class="NBAStats.Core.Views.PlayersPage">
     <ContentPage.Content>
         <CollectionView VerticalOptions="FillAndExpand"
                         Margin="0,20"
@@ -122,4 +123,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </ContentPage.Content>
-</ContentPage>
+</controls:CustomContentPage>

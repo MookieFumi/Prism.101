@@ -4,6 +4,7 @@ using NBAStats.Core.Model;
 using NBAStats.Core.Services;
 using NBAStats.Core.ViewModels.Base;
 using NBAStats.Core.Views;
+using Prism.Navigation;
 
 namespace NBAStats.Core.ViewModels
 {
@@ -54,7 +55,10 @@ namespace NBAStats.Core.ViewModels
                     await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}");
                     //await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
                 }
-                UserDialogs.Toast("Invalid login, please try it again");
+                else
+                {
+                    UserDialogs.Toast("Invalid login, please try it again");
+                }
             }
             catch (Exception exception)
             {

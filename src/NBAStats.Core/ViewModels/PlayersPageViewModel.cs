@@ -10,6 +10,7 @@ using NBAStats.Core.Views;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace NBAStats.Core.ViewModels
 {
@@ -87,7 +88,7 @@ namespace NBAStats.Core.ViewModels
                     { "player", SelectedPlayer }
                 };
 
-            await NavigationService.NavigateAsync(nameof(PlayerPage), @params);
+            await NavigationService.NavigateAsync($"{nameof(PlayerPage)}", @params);
         }
 
         #region Properties

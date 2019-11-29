@@ -1,8 +1,8 @@
-﻿using Xamarin.Forms;
+﻿using NBAStats.Core.Controls;
 
 namespace NBAStats.Core.Views
 {
-    public partial class PlayersPage : ContentPage
+    public partial class PlayersPage : CustomContentPage
     {
         public PlayersPage()
         {
