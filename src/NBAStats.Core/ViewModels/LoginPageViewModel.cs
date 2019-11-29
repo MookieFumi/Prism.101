@@ -52,8 +52,8 @@ namespace NBAStats.Core.ViewModels
                 if (response.IsValid)
                 {
                     ContextService.SaveContext(Username, response.ApiUrl, UseCacheServices, AllowSendStats);
-                    await NavigationService.NavigateAsync($"/{nameof(MyTabbedPage)}");
-                    //await NavigationService.NavigateAsync($"/NavigationPage/{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
+                    await NavigationService.NavigateAsync($"{nameof(MyTabbedPage)}");
+                    //await NavigationService.NavigateAsync($"{nameof(MyTabbedPage)}?{KnownNavigationParameters.SelectedTab}={nameof(SettingsPage)}");
                 }
                 else
                 {

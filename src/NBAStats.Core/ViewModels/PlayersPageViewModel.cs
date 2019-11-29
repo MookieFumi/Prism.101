@@ -88,7 +88,7 @@ namespace NBAStats.Core.ViewModels
                     { "player", SelectedPlayer }
                 };
 
-            await NavigationService.NavigateAsync($"{nameof(PlayerPage)}", @params);
+            await NavigationService.NavigateAsync($"NavigationPage/PlayersPage/{nameof(PlayerPage)}", @params);
         }
 
         #region Properties

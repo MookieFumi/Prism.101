@@ -6,7 +6,15 @@ namespace NBAStats.Core.Views
     {
         public PlayerPage()
         {
-            InitializeComponent();
+            try
+            {
+
+                InitializeComponent();
+            }
+            catch (System.Exception ex)
+            {
+
+            }
         }
     }
 }
